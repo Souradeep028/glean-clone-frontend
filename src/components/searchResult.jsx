@@ -64,7 +64,7 @@ const SearchResult = ({ searchTerm, isLoading, error, data }) => {
 							<p className='text-sm text-gray-700 mb-2'>Visibility: {result.visibility}</p>
 							<div className='flex flex-wrap mb-2'>
 								<span className='text-sm text-gray-700 mr-2'>Languages:</span>
-								{result.languages_used.map((language, index) => (
+								{result.languages_used?.map((language, index) => (
 									<span
 										key={index}
 										className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium mr-2 ${getRandomBadgeStyle()}`}>
