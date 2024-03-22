@@ -11,7 +11,7 @@ export const fetchData = async (term) => {
 			}),
 		});
 		if (!response.ok) {
-			throw new Error(`Network response was not ok (status: ${response.status})`);
+			throw { status: response.status, message: `Network response was not ok (status: ${response.status})` };
 		}
 		const data = await response.json();
 		console.log(data);

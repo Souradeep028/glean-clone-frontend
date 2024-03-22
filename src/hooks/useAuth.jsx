@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, createContext } from 'react';
+import React, { useEffect, useContext, createContext, useState } from 'react';
 import { fetchTokens, refreshAccessToken } from '@/api/apis';
 
 const AuthContext = createContext();
@@ -8,12 +8,15 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+	const [username, setUsername] = useState();
+
 	const login = async (username, password) => {
 		try {
 			const { access, refresh } = await fetchTokens(username, password);
 			localStorage.setItem('accessToken', access);
 			localStorage.setItem('refreshToken', refresh);
 			localStorage.setItem('username', username);
+			setUsername(username);
 		} catch (error) {
 			console.error('Login failed:', error);
 			throw error;
@@ -24,14 +27,18 @@ export function AuthProvider({ children }) {
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('refreshToken');
 		localStorage.removeItem('username');
+		setUsername(null);
 	};
 
 	useEffect(() => {
+		const username = localStorage.getItem('username');
+		setUsername(username);
+
 		const tryRefreshToken = async () => {
 			const refreshToken = localStorage.getItem('refreshToken');
 			if (!refreshToken) {
 				console.log('No refresh token available');
-				localStorage.removeItem('username');
+				logout();
 				return;
 			}
 			try {
@@ -49,5 +56,5 @@ export function AuthProvider({ children }) {
 		}
 	}, []);
 
-	return <AuthContext.Provider value={{ login, logout }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ username, login, logout }}>{children}</AuthContext.Provider>;
 }

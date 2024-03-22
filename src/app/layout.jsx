@@ -14,6 +14,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
+			<title>Glean Clone</title>
 			<body className={inter.className}>
 				<AuthProvider>{children}</AuthProvider>
 			</body>

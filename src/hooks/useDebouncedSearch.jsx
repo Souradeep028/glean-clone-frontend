@@ -23,6 +23,7 @@ export const useDebouncedSearch = (searchFunction, debounceDelay = 1000) => {
 			} catch (error) {
 				setError(error);
 				setData(null);
+				console.log(error);
 			} finally {
 				setIsLoading(false);
 			}

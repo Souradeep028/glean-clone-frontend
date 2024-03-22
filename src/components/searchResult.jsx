@@ -41,6 +41,8 @@ const SearchResult = ({ searchTerm, isLoading, error, data }) => {
 		);
 	}
 
+	console.log(data);
+
 	return (
 		<div className='container mx-auto'>
 			<h2 className='text:sm md:text-xl font-bold mb-8 text-center w-full text-[#621e68]'>
@@ -48,7 +50,7 @@ const SearchResult = ({ searchTerm, isLoading, error, data }) => {
 			</h2>
 
 			<div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4'>
-				{data.map((result, index) => (
+				{data?.map((result, index) => (
 					<div
 						key={index}
 						className='rounded-2xl shadow-md bg-white border border-gray-200 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1'>

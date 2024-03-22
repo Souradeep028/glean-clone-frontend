@@ -1,4 +1,4 @@
-export default function SearchBar({ searchTerm, setSearchTerm }) {
+export default function SearchBar({ searchTerm, setSearchTerm, logout }) {
 	const handleSearchChange = (e) => {
 		setSearchTerm(e.target.value);
 	};
